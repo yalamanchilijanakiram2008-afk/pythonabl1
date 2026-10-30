@@ -1,48 +1,60 @@
-def calculate_tax(gross_salary):
-    """Calculate monthly income tax using progressive example slabs."""
-    if gross_salary <= 25000:
-        tax = 0
-    elif gross_salary <= 50000:
-        tax = (gross_salary - 25000) * 0.05
-    elif gross_salary <= 100000:
-        tax = 25000 * 0.05 + (gross_salary - 50000) * 0.10
-    else:
-        tax = 25000 * 0.05 + 50000 * 0.10 + (gross_salary - 100000) * 0.20
 
-    return tax
-
+print("EMPLOYEE SALARY STATEMENT")
 
 employee_name = input("Enter employee name: ")
+
 basic_pay = float(input("Enter basic pay: Rs. "))
 allowances = float(input("Enter total allowances: Rs. "))
 overtime_hours = float(input("Enter overtime hours: "))
 overtime_rate = float(input("Enter overtime rate per hour: Rs. "))
 incentives = float(input("Enter incentives: Rs. "))
 
+# Calculate overtime pay
 overtime_pay = overtime_hours * overtime_rate
+
+# Calculate gross salary
 gross_salary = basic_pay + allowances + overtime_pay + incentives
 
-# Example deduction: provident fund is 12% of basic pay.
+# Calculate provident fund
 provident_fund = basic_pay * 0.12
-income_tax = calculate_tax(gross_salary)
+
+# Calculate income tax using if-else
+if gross_salary <= 25000:
+    income_tax = 0
+
+elif gross_salary <= 50000:
+    income_tax = (gross_salary - 25000) * 0.05
+
+elif gross_salary <= 100000:
+    income_tax = (25000 * 0.05) + ((gross_salary - 50000) * 0.10)
+
+else:
+    income_tax = (25000 * 0.05) + (50000 * 0.10) + ((gross_salary - 100000) * 0.20)
+
+# Calculate total deductions
 total_deductions = provident_fund + income_tax
+
+# Calculate net salary
 net_salary = gross_salary - total_deductions
 
+# Display salary statement
 print("\n========== SALARY STATEMENT ==========")
-print(f"Employee:                 {employee_name}")
-print("--------------------------------------")
-print("EARNINGS")
-print(f"Basic pay:                Rs. {basic_pay:,.2f}")
-print(f"Allowances:               Rs. {allowances:,.2f}")
-print(f"Overtime pay:             Rs. {overtime_pay:,.2f}")
-print(f"Incentives:               Rs. {incentives:,.2f}")
-print(f"Gross salary:             Rs. {gross_salary:,.2f}")
-print("--------------------------------------")
-print("DEDUCTIONS")
-print(f"Provident fund (12%):     Rs. {provident_fund:,.2f}")
-print(f"Progressive income tax:   Rs. {income_tax:,.2f}")
-print(f"Total deductions:         Rs. {total_deductions:,.2f}")
-print("--------------------------------------")
-print(f"NET SALARY:               Rs. {net_salary:,.2f}")
+
+print("Employee:", employee_name)
+
+print("\nEARNINGS")
+print("Basic Pay: Rs.", basic_pay)
+print("Allowances: Rs.", allowances)
+print("Overtime Pay: Rs.", overtime_pay)
+print("Incentives: Rs.", incentives)
+print("Gross Salary: Rs.", gross_salary)
+
+print("\nDEDUCTIONS")
+print("Provident Fund: Rs.", provident_fund)
+print("Income Tax: Rs.", income_tax)
+print("Total Deductions: Rs.", total_deductions)
+
+print("\nNET SALARY: Rs.", round(net_salary, 2))
+
 print("======================================")
-print("Note: Tax slabs and deduction rates are examples.")
+print("Note: Tax rates are examples.")
